@@ -19,6 +19,7 @@ class Employee:
         print "Name : ", self.name,  ", Salary: ", self.salary
 
     def getEmployeeData(self):
-       return self.codeEmployee+" "+self.name+" "+self.email+" "+self.salary+" "+self.id+" "+self.id+"\n"
-
+        st = self.codeEmployee+" "
+        st += self.name+" "+self.email+" "+str(self.salary)+" "+str(self.id)+" "+str(self.phone)+"\n"
+        return st
 

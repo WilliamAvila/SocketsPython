@@ -4,13 +4,22 @@ from Employee import Employee
 
 
 
-def modifyEmployee(id,emp):
+def editEmployee(code,emp):
 
-    ln = searchEmployee(id)
+    ln = searchLine(code)
     replace_line("Employee.txt", ln-1, emp.getEmployeeData())
 
+def findValue(val):
+    print(val)
+    with open("Employee.txt") as openfile:
+        for line in openfile:
+            for part in line.split():
+                if val in part:
+                    return val
+    return  ' '
 
-def searchEmployee(id):
+
+def searchLine(id):
     linenumber=0;
     with open("Employee.txt") as openfile:
         for line in openfile:
@@ -20,6 +29,14 @@ def searchEmployee(id):
                     print part
                     return linenumber
     return 0
+
+def searchEmployee(id):
+    if len(id)==4:
+        with open("Employee.txt", 'r') as openfile:
+            for line in openfile:
+                if id in line:
+                    return line
+    return ' '
 
 
 def replace_line(file_name, line_num, text):
@@ -31,23 +48,21 @@ def replace_line(file_name, line_num, text):
 
 def insertEmployee(emp):
     file = open("Employee.txt", "a")
-    file.write(emp.getEmployeeData())
+    file.write(emp)
 
     file.close()
 
 def listEmployees():
+    str=""
     file = open('Employee.txt', 'r')
     for line in file:
-        print line,
+        str += line
+        print line
+    return str
 
 emp = Employee("aa11","William","william.zx1@gmail.com","0","1804199301762","33165891")
-emp2 = Employee("aa12","QQiam","william.zx1@gmail.com","0","1804199301762","33165891")
-emp3 = Employee("aa13","QQiam","william.zx1@gmail.com","0","1804199301762","33165891")
-
-listEmployees()
-searchEmployee("aa12")
-modifyEmployee("aa13", emp2)
-
+emp2 = Employee("aa12","Arturo","william.zx1@hotmail.com","0","1804199301763","33165892")
+emp3 = Employee("aa13","QQiam","william.zx1@gg.com","0","1804199301764","33165893")
 
 
 

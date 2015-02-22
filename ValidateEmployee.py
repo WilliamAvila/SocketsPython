@@ -1,12 +1,19 @@
 __author__ = 'william'
 
 import re
+import string
+
 
 def generateCode():
-    return 0
+    code = "aa00"
+    return code;
 
 def validateName(name):
-    return 0
+    if not re.match('^[A-Za-z]*$', name):
+        return True
+    else:
+        return False
+
 
 def validateEmail(email):
     if not re.match(r"^[A-Za-z0-9\.\+_-]+@[A-Za-z0-9\._-]+\.[a-zA-Z]*$", email):
@@ -15,10 +22,22 @@ def validateEmail(email):
         return False
 
 def validateSalary(salary):
-    return 0
+    if not re.match('^[+-]?\d+(\.\d+)$', salary):
+        return True
+    else:
+        return False
 
 def validateId(id):
-    return 0
+    if not re.match('^[0-9]{13}$', id):
+        return True
+    else:
+        return False
 
 def validatePhone(phone):
-    return 0
+    if not re.match('^[0-9]{8}$', phone):
+        return True
+    else:
+        return False
+
+
+
