@@ -41,7 +41,7 @@ while True:
         continue
 
     elif tokens[0] == 'edit':
-        EmployeeManager.modifyEmployee(tokens[1], tokens[2])
+        EmployeeManager.editEmployee(tokens[1], tokens[2])
         continue
 
     elif tokens[0] == "unique":

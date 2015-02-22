@@ -51,7 +51,7 @@ def getValidatedEmployee(code):
     enc = s.recv(1024)
     if enc.decode('utf-8') == id:
         print("ID Duplicated")
-        return  None
+        return None
 
     phone = raw_input('Enter Phone number: \n')
     if ValidateEmployee.validatePhone(phone):
@@ -78,6 +78,16 @@ def insertEmployee():
     code = ValidateEmployee.generateCode()
     print('Code: ' + str(code))
 
+    cod2="unique,"
+    cod2 += code
+    s.send(cod2.encode('utf-8'))
+    enc = s.recv(1024)
+    res = enc.decode('utf-8')
+    if res == code:
+        print "Code already exists try again"
+        return
+
+
     emp = getValidatedEmployee(code)
 
     if emp:
@@ -91,16 +101,20 @@ def insertEmployee():
 
 def editEmployee():
     cod ='edit,'
+    cod2="search,"
 
     code = raw_input("Enter EmployeeCode \n")
-    s.send(code.encode('utf-8'))
+    cod2 += code
+    s.send(cod2.encode('utf-8'))
     enc = s.recv(1024)
     res = enc.decode('utf-8')
     if res != ' ':
         print(res)
     elif res:
+        print('Code: ' + str(code))
         print('Not Found')
-    print('Code: ' + str(code))
+        return
+
 
     emp = getValidatedEmployee(code)
     if emp:

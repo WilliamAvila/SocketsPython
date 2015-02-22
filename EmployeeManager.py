@@ -7,7 +7,7 @@ from Employee import Employee
 def editEmployee(code,emp):
 
     ln = searchLine(code)
-    replace_line("Employee.txt", ln-1, emp.getEmployeeData())
+    replace_line("Employee.txt", ln-1, emp)
 
 def findValue(val):
     print(val)
