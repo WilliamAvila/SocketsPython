@@ -1,17 +1,29 @@
 __author__ = 'william'
-import HTMLParser
-from requests import get
+from lxml import html
+import requests
 
-def getTasas():
-    r = get('https://www.bac.net/honduras/esp/banco/')
+page = requests.get('http://econpy.pythonanywhere.com/ex/001.html')
+tree = html.fromstring(page.text)
 
-    class MyHTMLParser(HTMLParser):
-        lista =''
-        def handle_data(self, data):
-            if str(data).__contains__('Lps.'):
-                self.lista+= str(data).replace('Lps.','').strip()+','
+#This will create a list of buyers:
+buyers = tree.xpath('//div[@title="buyer-name"]/text()')
+#This will create a list of prices
+prices = tree.xpath('//span[@class="item-price"]/text()')
 
-    parser = MyHTMLParser()
-    parser.feed(r.text)
 
-    return parser.lista
+print 'Buyers: ', buyers
+print 'Prices: ', prices
+
+
+
+pageBac = requests.get('https://www.bac.net/honduras/esp/banco/')
+treeBac = html.fromstring(pageBac.text)
+
+pageInterbanca = requests.get('https://www.interbanca.hn/INTERBANCA/INTERBANCA/BE_P_MOSTRARFACTOR?Pn_Empresa=1')
+treeIB = html.fromstring(pageInterbanca.text)
+
+Dolar = treeIB.xpath()
+
+print Dolar
+
+
